@@ -3,11 +3,12 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
 import Clip from './utils/Clips'
+import SocialLink from './utils/SocialLink'
 // eslint-disable-next-line react/prop-types
 const Hero = ({heroapi:{title,subtitle,btntext,img,sociallinks,videos}}) => {
     
   return (
-    <div className=' relative h-auto w-auto flex flex-col'>
+    <div className=' relative h-auto w-auto flex flex-col '>
         <div className=' bg-theme clip-path h-[85vh] lg:h-[75vh] md:h-[65vh] sm:h-[55vh] w-auto absolute
          top-0 left-0 right-0 opacity-100 z-10'></div>
         <div className=' relative opacity-100 z-20 grid items-center justify-items-center mt-28 md:mt-24 nike-container'>
@@ -24,7 +25,14 @@ const Hero = ({heroapi:{title,subtitle,btntext,img,sociallinks,videos}}) => {
                      
                 ))}
             </div>
-            <div></div>
+            <div className=' grid items-center absolute top-[33vh] lg:top[27vh] right-0 gap-3'>
+                {sociallinks?.map((val,i)=>(
+                    <SocialLink
+                     key={i}
+                     icon={val.icon}
+                    />
+                ))}
+            </div>
             </div>
             <div>
                 <img src={img} alt='hero-img' 
