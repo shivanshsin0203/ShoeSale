@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react'
 
 const Footer = ({ footerAPI: { titles, links } }) => {
@@ -27,7 +25,7 @@ const Footer = ({ footerAPI: { titles, links } }) => {
             ))}
           </div>
           <div className='mt-5 text-center'>
-            <p className='text-sm md:text-center'>Made By <span className='font-semibold'>Shivansh Singh {Year}</span></p>
+            <p className='text-sm md:text-center'>Copyright<sup className='text-base font-bold'>&copy;</sup> All Reserved Rights <span className='font-semibold'>JSSTACK DEVELOPERS {Year}</span></p>
           </div>
         </div>
       </footer>

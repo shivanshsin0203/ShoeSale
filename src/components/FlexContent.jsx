@@ -1,6 +1,3 @@
-/* eslint-disable react/jsx-no-target-blank */
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import React from 'react'
 
 const FlexContent = ({ ifExists, endpoint: { title, heading, text, img, btn, url } }) => {

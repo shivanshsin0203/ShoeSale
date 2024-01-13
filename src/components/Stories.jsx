@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-no-target-blank */
 import React from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import '@splidejs/splide/css';

@@ -1,6 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-// eslint-disable-next-line no-unused-vars
 import React from 'react';
 import Clips from './utils/Clips';
 import SocialLink from './utils/SocialLink';
