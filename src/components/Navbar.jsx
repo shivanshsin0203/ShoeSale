@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectTotalQTY, setOpenCart } from "../app/CartSlice.js";
+import toast from "react-hot-toast";
+import { selectTotalQTY, setOpenCart, selectUser, setUser } from "../app/CartSlice.js";
 import {
   signOut,
   onAuthStateChanged,
@@ -23,18 +24,24 @@ import logo from "../assets/logo.png";
 import { set } from "lodash";
 const auth = getAuth(app);
 const Navbar = () => {
-  const [user, setuser] = useState(false);
+  const [islogin, setIslogin] = useState(false);
   const [navState, setNavState] = useState(false);
   const dispatch = useDispatch();
   const totalQTY = useSelector(selectTotalQTY);
-
+  const user=useSelector(selectUser)
   const loginHandle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider);
+    
   };
   const logout = () => {
     signOut(auth);
-    setuser(false);
+    setIslogin(false)
+    dispatch(
+        setUser({
+          user: false,
+        })
+      );
   };
   const onCartToggle = () => {
     dispatch(
@@ -61,9 +68,20 @@ const Navbar = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setuser(user);
+        setIslogin(true)
+        dispatch(
+            setUser({
+              user: user,
+            })
+          );
+          toast.success("Login Successfull");
       } else {
-        setuser(false);
+        setIslogin(false)
+        dispatch(
+            setUser({
+              user: false,
+            })
+          );
       }
     });
   }, []);
@@ -86,7 +104,7 @@ const Navbar = () => {
           </div>
           <ul className="flex items-center justify-center gap-2">
             <l1 className="grid items-center">
-              {user ? (
+              {islogin ? (
                  <button
                  type="button"
                  onClick={logout}

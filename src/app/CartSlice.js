@@ -8,6 +8,7 @@ const initialState = {
     : [], 
   cartTotalAmount: 0,
   cartTotalQantity: 0,
+  user:false,
 };
 
 const CartSlice = createSlice({
@@ -81,7 +82,11 @@ const CartSlice = createSlice({
       toast.success(`Cart Cleared`);
       localStorage.setItem("cart", JSON.stringify(state.cartItems));
     },
-
+    setUser:(state,action)=>{
+      state.user=action.payload.user;
+      console.log(action.payload.user);
+      
+    },
     setGetTotals: (state, action) => {
       let { totalAmount, totalQTY } = state.cartItems.reduce((cartTotal, cartItem)=> {
         const { price, cartQuantity } = cartItem;
@@ -110,7 +115,8 @@ export const {
   setIncreaseItemQTY,
   setDecreaseItemQTY,
   setClearCartItems,
-  setGetTotals
+  setGetTotals,
+  setUser
 } = CartSlice.actions;
 
 export const selectCartState = (state) => state.cart.cartState;
@@ -119,4 +125,5 @@ export const selectCartItems = (state) => state.cart.cartItems;
 export const selectTotalAmount = (state) => state.cart.cartTotalAmount;
 export const selectTotalQTY = (state) => state.cart.cartTotalQantity;
 
+export const selectUser = (state) => state.cart.user;
 export default CartSlice.reducer;

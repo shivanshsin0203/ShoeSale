@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectCartItems,
@@ -7,7 +8,8 @@ import {
   selectTotalQTY,
   setClearCartItems,
   setCloseCart,
-  setGetTotals
+  setGetTotals,
+  selectUser
 } from "../app/CartSlice.js";
 import CartCount from "./cart/CartCount";
 import CartEmpty from "./cart/CartEmpty";
@@ -19,7 +21,7 @@ const Cart = () => {
   const cartItems = useSelector(selectCartItems);
   const totalAmount = useSelector(selectTotalAmount);
   const totalQTY = useSelector(selectTotalQTY);
-  
+  const user=useSelector(selectUser);
   // console.log(cartItems)
 
   useEffect(() => {
@@ -37,7 +39,11 @@ const Cart = () => {
   const onClearCartItems = () => {
     dispatch(setClearCartItems())
   }
-  
+  const loginCheck=()=>{
+    if(user===false){
+      toast.error("Please Login First")
+    }
+  }
   return (
     <>
       <div
@@ -69,7 +75,7 @@ const Cart = () => {
               </div>
               <div className="grid items-center gap-2">
                 <p className="text-sm font-medium text-center">Taxes and Shipping Will Calculate At Shipping</p>
-                <button type="button" className="button-theme bg-theme-cart text-white">Check Out</button>
+                <button type="button" className="button-theme bg-theme-cart text-white" onClick={loginCheck}>Check Out</button>
               </div>
             </div>
 
