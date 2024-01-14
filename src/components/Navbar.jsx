@@ -1,15 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectTotalQTY, setOpenCart } from '../app/CartSlice.js';
+import {signOut,onAuthStateChanged,getAuth,GoogleAuthProvider,signInWithPopup} from "firebase/auth"
+import {app} from "../firebase.js"
 
 import { HeartIcon, MagnifyingGlassIcon, ShoppingBagIcon } from '@heroicons/react/24/outline'
 import logo from '../assets/logo.png';
-
+const auth=getAuth(app);
 const Navbar = () => {
+    const [user,setuser]=useState(false);
     const [navState, setNavState] = useState(false);
     const dispatch = useDispatch();
     const totalQTY = useSelector(selectTotalQTY);
 
+    const loginHandle=()=>{
+        const provider=new GoogleAuthProvider();
+        signInWithPopup(auth,provider);
+         
+      }
+      const logout=()=>{
+         signOut(auth);
+      }
     const onCartToggle = () => {
         dispatch(setOpenCart({
             cartState: true
@@ -44,6 +55,9 @@ return (
                 />
             </div>
             <ul className='flex items-center justify-center gap-2'>
+                <l1 className=' grid items-center '>
+                <button type='button' className='button-theme bg-slate-200  shadow-slate-200 rounded-xl my-5 hover:scale-110 transition-all duration-100' onClick={loginHandle}>Sign Up</button>
+                </l1>
                 <li className='grid items-center'>
                     <MagnifyingGlassIcon className={`icon-style ${navState && "text-slate-900 transition-all duration-300"}`} />
                 </li>
