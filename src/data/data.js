@@ -29,8 +29,8 @@ import product12 from "../assets/product12.png";
 import facebook from "../assets/facebook.svg";
 import instagram from "../assets/instagram.svg";
 import twitter from "../assets/twitter.svg";
-import youtube from "../assets/youtube.svg";
-import messenger from "../assets/messenger.svg";
+import linkedin from "../assets/linkedin.svg";
+import github from "../assets/github-mark.svg";
 
 const heroapi = {
   title: "Play With Electric Nike",
@@ -43,11 +43,11 @@ const heroapi = {
     { imgsrc: vcover3, clip: clip },
   ],
   sociallinks: [
-    { icon: facebook },
-    { icon: messenger },
-    { icon: instagram },
-    { icon: twitter },
-    { icon: youtube },
+    { icon: linkedin,link:"https://www.linkedin.com/in/shivansh-singh-736521289" },
+    { icon: github,link:'https://github.com/shivanshsin0203' },
+    { icon: instagram,link:"https://www.instagram.com/shivanshsingh4378" },
+    { icon: twitter,link:"https://twitter.com/ShivanshSi0203" },
+    
   ],
 };
 
@@ -368,7 +368,7 @@ const footerAPI = {
       {link: "Promotions"},
       {link: "Find A Store"},
       {link: "Signup"},
-      {link: "Nike Jouneral"},
+     
       {link: "Send Us Feeback"},
     ],
   ]
