@@ -7,7 +7,7 @@ const Products = () => {
         const response=await axios.get('http://localhost:3005/test');
         console.log(response.data.data.items[2].img);
       
-        setImg(response.data.data.items[11].img);
+        setImg(response.data.data.items[8].img);
     }
 
     useEffect(()=>{
