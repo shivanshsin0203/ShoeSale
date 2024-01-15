@@ -12,6 +12,7 @@
     "@heroicons/react": "^2.0.11",
     "@reduxjs/toolkit": "^1.8.5",
     "@splidejs/react-splide": "^0.7.10",
+    "axios": "^1.6.5",
     "firebase": "^10.7.1",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
