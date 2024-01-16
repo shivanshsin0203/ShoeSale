@@ -1,4 +1,4 @@
-// FilterDialog.js
+
 import React from 'react';
 
 const FilterDialog = ({ selectedBrands, onBrandCheckboxChange, onClose }) => {
@@ -42,7 +42,7 @@ const FilterDialog = ({ selectedBrands, onBrandCheckboxChange, onClose }) => {
           >
             Close
           </button>
-          {/* Add styling and hover effects as needed */}
+        
         </div>
       </div>
     </div>

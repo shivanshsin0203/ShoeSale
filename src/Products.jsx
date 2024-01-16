@@ -2,15 +2,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Cart, Navbar, Footer } from './components';
-import Title from './components/utils/Title';
 import { heroapi, popularsales, toprateslaes, highlight, sneaker, story, footerAPI } from './data/data.js';
+import Title from './components/utils/Title';
 import Item from './components/utils/Item';
 import FilterDialog from './components/utils/FilterDialogbox'; // Import the FilterDialog component
+import SortByDialog from './components/utils/SortByDialog'; // Import the SortByDialog component
 
 const Products = () => {
   const [items, setItems] = useState([]);
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [showFilterDialog, setShowFilterDialog] = useState(false);
+  const [showSortByDialog, setShowSortByDialog] = useState(false);
+  const [selectedSortOption, setSelectedSortOption] = useState(null);
 
   // Function to fetch products from the server
   async function getProducts() {
@@ -38,7 +41,6 @@ const Products = () => {
     } else {
       setSelectedBrands((prevBrands) => [...prevBrands, brand]);
     }
-    console.log(selectedBrands)
   };
 
   // Show the filter dialog
@@ -51,10 +53,29 @@ const Products = () => {
     setShowFilterDialog(false);
   };
 
+  // Show the sort by dialog
+  const handleSortByButtonClick = () => {
+    setShowSortByDialog(true);
+  };
+
+  // Close the sort by dialog
+  const handleSortByDialogClose = () => {
+    setShowSortByDialog(false);
+  };
+
+  // Handle changes when sort option is selected
+  const handleSortOptionChange = (option) => {
+    setSelectedSortOption(option);
+    setShowSortByDialog(false); // Close the dialog after selecting an option
+    // Additional logic to update items based on the selected sort option
+  };
+
   // Filter items based on selected brands
   const filteredItems = items.filter((item) =>
     selectedBrands.length === 0 ? true : selectedBrands.includes(item.brand)
   );
+
+  // Additional logic to sort items based on selectedSortOption
 
   return (
     <>
@@ -82,7 +103,12 @@ const Products = () => {
         >
           Filter
         </div>
-        <div className='w-[78px] border-2 border-slate-300 hover:border-black hover:scale-110 hover:transition-all hover:duration-75 p-1 cursor-pointer hover:p-2'>Sort By</div>
+        <div
+          className='w-[78px] border-2 border-slate-300 hover:border-black hover:scale-110 hover:transition-all hover:duration-75 p-1 cursor-pointer hover:p-2'
+          onClick={handleSortByButtonClick}
+        >
+          Sort By
+        </div>
       </div>
       {/* Product grid */}
       <div className={`grid items-center justify-items-center gap-7 lg:gap-5 mt-7  grid-cols-4 xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 nike-container`}>
@@ -103,8 +129,17 @@ const Products = () => {
           onClose={handleFilterDialogClose}
         />
       )}
+
+      {/* Render SortByDialog component */}
+      {showSortByDialog && (
+        <SortByDialog
+          selectedSortOption={selectedSortOption}
+          onSortOptionChange={handleSortOptionChange}
+          onClose={handleSortByDialogClose}
+        />
+      )}
     </>
   );
-}
+};
 
 export default Products;
