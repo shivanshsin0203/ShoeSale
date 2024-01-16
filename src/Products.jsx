@@ -38,7 +38,16 @@ const Products = () => {
   async function reqProducts(brands, sortOption) {
     console.log(brands);
     console.log(sortOption);
-    
+    const result= await axios.post('http://localhost:3005/product', {
+      brands: brands,
+      sortOption: sortOption,
+    });
+    console.log(result.data.data);
+    const updatedItems = result.data.data.map((item) => ({
+        ...item,
+        img: `http://localhost:5173/src${item.img}`,
+      }));
+      setItems(updatedItems);
   }
 
   // Handle changes when brand checkboxes are clicked
