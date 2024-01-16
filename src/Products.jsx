@@ -1,5 +1,6 @@
 // Import necessary dependencies and components
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Cart, Navbar, Footer } from './components';
 import { heroapi, popularsales, toprateslaes, highlight, sneaker, story, footerAPI } from './data/data.js';
@@ -18,7 +19,7 @@ const Products = () => {
   // Function to fetch products from the server
   async function getProducts() {
     try {
-      const response = await axios.get('http://localhost:3005/test');
+      const response = await axios.get('http://localhost:3005/initial');
       const updatedItems = response.data.data.items.map((item) => ({
         ...item,
         img: `http://localhost:5173/src${item.img}`,
@@ -34,13 +35,22 @@ const Products = () => {
     getProducts();
   }, []);
 
+  async function reqProducts(brands, sortOption) {
+    console.log(brands);
+    console.log(sortOption);
+    
+  }
+
   // Handle changes when brand checkboxes are clicked
   const handleBrandCheckboxChange = (brand) => {
-    if (selectedBrands.includes(brand)) {
-      setSelectedBrands((prevBrands) => prevBrands.filter((b) => b !== brand));
-    } else {
-      setSelectedBrands((prevBrands) => [...prevBrands, brand]);
-    }
+    setSelectedBrands((prevBrands) => {
+      const updatedBrands = prevBrands.includes(brand)
+        ? prevBrands.filter((b) => b !== brand)
+        : [...prevBrands, brand];
+      
+      reqProducts(updatedBrands, selectedSortOption); // Pass updated brands to reqProducts
+      return updatedBrands; // Return the updated brands for state update
+    });
   };
 
   // Show the filter dialog
@@ -66,8 +76,8 @@ const Products = () => {
   // Handle changes when sort option is selected
   const handleSortOptionChange = (option) => {
     setSelectedSortOption(option);
-    setShowSortByDialog(false); // Close the dialog after selecting an option
-    // Additional logic to update items based on the selected sort option
+    setShowSortByDialog(false); 
+    reqProducts(selectedBrands, option);
   };
 
   // Filter items based on selected brands
@@ -88,7 +98,8 @@ const Products = () => {
       </div>
       {/* Breadcrumbs */}
       <div className='flex mt-5 p-8 space-x-4 '>
-        <h3 className='text-black font-semibold cursor-pointer '>Home </h3>
+        <Link to='/'>
+        <h3 className='text-black font-semibold cursor-pointer '>Home </h3></Link>
         <h5 className='text-slate-400'>. Products</h5>
       </div>
       {/* Title */}
