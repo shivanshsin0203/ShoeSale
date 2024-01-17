@@ -11,16 +11,66 @@ import {
   setGetTotals,
   selectUser
 } from "./app/CartSlice.js";
+import axios from 'axios';
 import CheckoutItem from './components/cart/CheckoutItem.jsx';
+import {  useNavigate } from "react-router-dom";
 import { Navbar, Footer, Cart } from './components';
 import { heroapi, popularsales, toprateslaes, highlight, sneaker, story, footerAPI } from './data/data.js';
 import Title from './components/utils/Title';
+import {loadStripe} from '@stripe/stripe-js';
 const Checkout = () => {
     const dispatch = useDispatch();
     const cartItems = useSelector(selectCartItems);
     const totalAmount = useSelector(selectTotalAmount);
     const totalQTY = useSelector(selectTotalQTY);
     const user=useSelector(selectUser);
+    const navigate = useNavigate();
+    const [pay, setpay] = React.useState({
+        name: "Shoe Sale",
+        author: "Shivansh Singh",
+        img: "https://i.pinimg.com/originals/20/60/2d/20602d43cc993811e5a6bd1886af4f33.png",
+        
+      });
+    
+      const initPayment = (data) => {
+        const options = {
+          key: "rzp_test_fyfVWVPuKfnYQy",
+          amount: data.amount,
+          currency: data.currency,
+          name: pay.name,
+          description: "Test Transaction",
+          image: pay.img,
+          order_id: data.id,
+          handler: async (response) => {
+            try {
+              const verifyUrl = "https://shoesale.onrender.com/api/payment/verify";
+              const { data } = await axios.post(verifyUrl, response);
+              console.log("verfyUrldata");
+               navigate("/products");
+            } catch (error) {
+              console.log(error);
+            }
+          },
+          theme: {
+            color: "#3399cc",
+          },
+        };
+        const rzp1 = new window.Razorpay(options);
+        rzp1.open();
+       
+      };
+    
+      const handlePayment = async () => {
+        console.log("got it")
+        try {
+          const orderUrl = "https://shoesale.onrender.com/api/payment/orders";
+          const { data } = await axios.post(orderUrl, { amount: totalAmount });
+          console.log(data);
+          initPayment(data.data);
+        } catch (error) {
+          console.log(error+"error in handle");
+        }
+      };
   return (
     <>
     <Navbar />
@@ -61,12 +111,12 @@ const Checkout = () => {
                 <span  className=' text-gray-500 font-sm'>₹0</span>
                </div>
             </div>
-            <div className=' flex  space-x-[80px] justify-between mt-7 px-3'>
+            <div className=' flex  space-x-[80px] justify-between mt-7 px-6'>
             <span className=' text-xl text-black-500 font-bold'>Grand Total </span>
                 <span  className=' text-xl text-black font-semibold'>₹{totalAmount*82}</span>
             </div>
             <div className=' px-2 mt-5'>
-            <button type="button" className="button-theme bg-theme-cart text-white text-xl w-full h-[58px]" >Pay Now</button>
+            <button type="button" className="button-theme bg-theme-cart text-white text-xl w-full h-[58px]" onClick={handlePayment}>Pay Now</button>
             </div>
         </div>
         </div>

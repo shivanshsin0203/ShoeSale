@@ -19,7 +19,7 @@ const Products = () => {
   // Function to fetch products from the server
   async function getProducts() {
     try {
-      const response = await axios.get('http://localhost:3005/initial');
+      const response = await axios.get('https://shoesale.onrender.com/initial');
       const updatedItems = response.data.data.items.map((item) => ({
         ...item,
         img: `http://localhost:5173/src${item.img}`,
@@ -38,7 +38,7 @@ const Products = () => {
   async function reqProducts(brands, sortOption) {
     console.log(brands);
     console.log(sortOption);
-    const result= await axios.post('http://localhost:3005/product', {
+    const result= await axios.post('https://shoesale.onrender.com/product', {
       brands: brands,
       sortOption: sortOption,
     });
