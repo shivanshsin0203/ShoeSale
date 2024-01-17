@@ -14,7 +14,7 @@ const Products = () => {
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [showFilterDialog, setShowFilterDialog] = useState(false);
   const [showSortByDialog, setShowSortByDialog] = useState(false);
-  const [selectedSortOption, setSelectedSortOption] = useState(null);
+  const [selectedSortOption, setSelectedSortOption] = useState('lowToHigh');
 
   // Function to fetch products from the server
   async function getProducts() {
@@ -48,6 +48,7 @@ const Products = () => {
         img: `http://localhost:5173/src${item.img}`,
       }));
       setItems(updatedItems);
+      return updatedItems;
   }
 
   // Handle changes when brand checkboxes are clicked
@@ -130,9 +131,12 @@ const Products = () => {
           Sort By
         </div>
       </div>
+      <div className=' mt-3 font-semibold p-5 ml-7'>
+        <span className=' text-xl'>{items.length} Products</span>
+      </div>
       {/* Product grid */}
       <div className={`grid items-center justify-items-center gap-7 lg:gap-5 mt-7  grid-cols-4 xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 nike-container`}>
-        {filteredItems?.map((item, i) => (
+        {items?.map((item, i) => (
           <Item {...item} key={i} ifExists={false} />
         ))}
       </div>

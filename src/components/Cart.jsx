@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectCartItems,
@@ -73,10 +74,13 @@ const Cart = () => {
                 <h1 className="text-base font-semibold uppercase">SubTotal</h1>
                 <h1 className="text-sm rounded bg-theme-cart text-slate-100 px-1 py-0.5">${totalAmount}</h1>
               </div>
+              <Link to="/checkout">
               <div className="grid items-center gap-2">
                 <p className="text-sm font-medium text-center">Taxes and Shipping Will Calculate At Shipping</p>
+               
                 <button type="button" className="button-theme bg-theme-cart text-white" onClick={loginCheck}>Check Out</button>
               </div>
+              </Link>
             </div>
 
           </div>}
