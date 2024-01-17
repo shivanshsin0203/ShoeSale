@@ -22,7 +22,7 @@ const Products = () => {
       const response = await axios.get('https://shoesale.onrender.com/initial');
       const updatedItems = response.data.data.items.map((item) => ({
         ...item,
-        img: `http://localhost:5173/src${item.img}`,
+        img: `https://shoe-sale.vercel.app/src${item.img}`,
       }));
       setItems(updatedItems);
     } catch (error) {
@@ -45,7 +45,7 @@ const Products = () => {
     console.log(result.data.data);
     const updatedItems = result.data.data.map((item) => ({
         ...item,
-        img: `http://localhost:5173/src${item.img}`,
+        img: `https://shoe-sale.vercel.app/src${item.img}`,
       }));
       setItems(updatedItems);
       return updatedItems;
