@@ -22,8 +22,9 @@ const Products = () => {
       const response = await axios.get('https://shoesale.onrender.com/initial');
       const updatedItems = response.data.data.items.map((item) => ({
         ...item,
-        img: `https://shoe-sale.vercel.app/src${item.img}`,
+        img: `https://shoesale.onrender.com/uploads${item.img}`,
       }));
+     
       setItems(updatedItems);
     } catch (error) {
       console.error('Error fetching products:', error);
@@ -45,8 +46,9 @@ const Products = () => {
     console.log(result.data.data);
     const updatedItems = result.data.data.map((item) => ({
         ...item,
-        img: `https://shoe-sale.vercel.app/src${item.img}`,
+        img: `https://shoesale.onrender.com/uploads${item.img}`,
       }));
+     
       setItems(updatedItems);
       return updatedItems;
   }
