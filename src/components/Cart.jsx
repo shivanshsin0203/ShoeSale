@@ -44,6 +44,13 @@ const Cart = () => {
     if(user===false){
       toast.error("Please Login First")
     }
+    else{
+      dispatch(
+        setCloseCart({
+          cartState: false,
+        })
+      );
+    }
   }
   return (
     <>
@@ -82,7 +89,7 @@ const Cart = () => {
               </div>
               </Link>
             </div>
-
+               
           </div>}
         </div>
       </div>

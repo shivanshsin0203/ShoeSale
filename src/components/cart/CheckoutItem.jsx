@@ -31,8 +31,10 @@ const CheckoutItem = ({ item: { id, title, text, img, color, shadow, price, cart
               <p className="text-sm text-slate-800 lg:text-xs">{text}</p>
             </div>
             <div className="flex items-center justify-around w-full">
-             
-              <div className="bg-theme-cart rounded text-white font-medium lg:text-xs w-7 h-6 lg:h-5 lg:w-6 flex items-center justify-center">{cartQuantity}</div>
+            <span className=" text-lg font-medium">Quantity :</span>
+              <div className="bg-theme-cart rounded text-white font-medium lg:text-xs w-7 h-6 lg:h-5 lg:w-6 flex items-center justify-center">
+               
+                {cartQuantity}</div>
               
             </div>
           </div>
