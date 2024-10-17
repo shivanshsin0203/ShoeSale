@@ -19,10 +19,10 @@ const Products = () => {
   // Function to fetch products from the server
   async function getProducts() {
     try {
-      const response = await axios.get('https://shoesale.onrender.com/initial');
+      const response = await axios.get('https://f41849126f.execute-api.ap-south-1.amazonaws.com/initial');
       const updatedItems = response.data.data.items.map((item) => ({
         ...item,
-        img: `https://shoesale.onrender.com/uploads${item.img}`,
+        img: `https://f41849126f.execute-api.ap-south-1.amazonaws.com/uploads${item.img}`,
       }));
      
       setItems(updatedItems);
@@ -39,14 +39,14 @@ const Products = () => {
   async function reqProducts(brands, sortOption) {
     console.log(brands);
     console.log(sortOption);
-    const result= await axios.post('https://shoesale.onrender.com/product', {
+    const result= await axios.post('https://f41849126f.execute-api.ap-south-1.amazonaws.com/product', {
       brands: brands,
       sortOption: sortOption,
     });
     console.log(result.data.data);
     const updatedItems = result.data.data.map((item) => ({
         ...item,
-        img: `https://shoesale.onrender.com/uploads${item.img}`,
+        img: `https://f41849126f.execute-api.ap-south-1.amazonaws.com/uploads${item.img}`,
       }));
      
       setItems(updatedItems);

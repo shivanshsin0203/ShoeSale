@@ -43,7 +43,7 @@ const Checkout = () => {
           order_id: data.id,
           handler: async (response) => {
             try {
-              const verifyUrl = "https://shoesale.onrender.com/api/payment/verify";
+              const verifyUrl = "https://f41849126f.execute-api.ap-south-1.amazonaws.com/api/payment/verify";
               const { data } = await axios.post(verifyUrl, response);
               console.log("verfyUrldata");
                navigate("/products");
@@ -63,7 +63,7 @@ const Checkout = () => {
       const handlePayment = async () => {
         console.log("got it")
         try {
-          const orderUrl = "https://shoesale.onrender.com/api/payment/orders";
+          const orderUrl = "https://f41849126f.execute-api.ap-south-1.amazonaws.com/api/payment/orders";
           const { data } = await axios.post(orderUrl, { amount: totalAmount });
           console.log(data);
           initPayment(data.data);
