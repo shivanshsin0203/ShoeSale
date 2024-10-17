@@ -46,7 +46,7 @@ const Products = () => {
     console.log(result.data.data);
     const updatedItems = result.data.data.map((item) => ({
         ...item,
-        img: `https://f41849126f.execute-api.ap-south-1.amazonaws.com/uploads${item.img}`,
+        img: `https://shoesale.onrender.com/uploads${item.img}`,
       }));
      
       setItems(updatedItems);

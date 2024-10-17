@@ -85,6 +85,7 @@ const Navbar = () => {
       }
     });
   }, []);
+  
   return (
     <>
       <header
