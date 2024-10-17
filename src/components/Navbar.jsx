@@ -22,6 +22,7 @@ import {
 
 import logo from "../assets/logo.png";
 import { set } from "lodash";
+import axios from "axios";
 const auth = getAuth(app);
 const Navbar = () => {
   const [islogin, setIslogin] = useState(false);
@@ -85,7 +86,11 @@ const Navbar = () => {
       }
     });
   }, []);
-  
+
+  useEffect(() => {
+    axios.get("https://shoesale.onrender.com/initial")
+  }, []);
+
   return (
     <>
       <header
